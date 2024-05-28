@@ -196,3 +196,4 @@ terraform.rc
 /app/lambda/requirements/six.py
 /.terraform/
 *.zip
+app/lambda/python

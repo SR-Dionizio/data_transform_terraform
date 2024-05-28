@@ -15,6 +15,7 @@ resource "null_resource" "lambda_layer" {
   # the command to install python and dependencies to the machine and zips
   provisioner "local-exec" {
     command = <<EOT
+      source venv/bin/activate
       cd ${local.layer_path}
       rm -rf python
       mkdir python

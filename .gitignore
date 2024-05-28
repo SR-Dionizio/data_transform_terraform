@@ -197,3 +197,4 @@ terraform.rc
 /.terraform/
 *.zip
 app/lambda/python
+tfplan

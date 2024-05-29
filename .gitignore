@@ -200,3 +200,5 @@ app/lambda/python
 tfplan
 *.json
 node_modules
+# Serverless directories
+.serverless

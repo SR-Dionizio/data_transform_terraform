@@ -7,18 +7,18 @@ service: datalake-dionizio
 
 provider:
   name: aws
-  runtime: python3.11
+  runtime: python3.10
   region: us-east-1
-  
+
 functions:
   hello:
-    handler: handler.hello
+    handler: app/lambda/request_posts.lambda_handler
     timeout: 60
-    memorySize: 100 
+    memorySize: 128 
     events:
       - httpApi:
-          path: /
-          method: get
+          path: /datalake-dionizio
+          method: post
 
 plugins:
   - serverless-python-requirements

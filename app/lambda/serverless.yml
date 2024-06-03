@@ -9,10 +9,23 @@ provider:
   name: aws
   runtime: python3.10
   region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+        - s3:DeleteObject
+      Resource:
+        - arn:aws:s3:::datalake-dados-dionizio/*
+    - Effect: Allow
+      Action:
+        - s3:ListBucket
+      Resource:
+        - arn:aws:s3:::datalake-dados-dionizio
 
 functions:
   hello:
-    handler: app/lambda/request_posts.lambda_handler
+    handler: request_posts.lambda_handler
     timeout: 60
     memorySize: 128 
     events:

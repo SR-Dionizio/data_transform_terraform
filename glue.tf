@@ -10,7 +10,7 @@ resource "aws_glue_crawler" "json_crawler" {
   database_name = aws_glue_catalog_database.datalake_database.name
 
   s3_target {
-    path = "s3://${aws_s3_bucket.datalake.bucket}/path/to/json/"
+    path = "s3://${aws_s3_bucket.datalake.bucket}/posts.json"
   }
 
   schema_change_policy {

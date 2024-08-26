@@ -25,7 +25,7 @@ provider:
 
 functions:
   hello:
-    handler: request_posts.lambda_handler
+    handler: request_cars.lambda_handler
     timeout: 60
     memorySize: 128 
     events:

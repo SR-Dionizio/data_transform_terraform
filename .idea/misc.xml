@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="/usr/bin/python3.11 (2)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11.7 WSL (Ubuntu-22.04): (/home/daniel/TF/venv/bin/python3.11)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11.7 WSL (Ubuntu-22.04): (/home/daniel/data_transform/venv/bin/python3.11)" project-jdk-type="Python SDK" />
 </project>

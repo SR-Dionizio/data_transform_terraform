@@ -38,15 +38,15 @@ resource "aws_iam_role_policy" "s3_access" {
     Version = "2012-10-17",
     Statement = [
       {
-        Action = [
-          "s3:PutObject",
-          "s3:GetObject",
-          "s3:ListBucket"
-        ],
+        Action = "s3:*",
         Effect = "Allow",
         Resource = [
           "arn:aws:s3:::datalake-dados-dionizio",
-          "arn:aws:s3:::datalake-dados-dionizio/*"
+          "arn:aws:s3:::datalake-dados-dionizio/*",
+          "arn:aws:s3:::datalake-dados-dionizio-processing-job-py",
+          "arn:aws:s3:::datalake-dados-dionizio-processing-job-py/*",
+          "arn:aws:s3:::datawarehouse-dados",
+          "arn:aws:s3:::datawarehouse-dados/*"
         ]
       },
       {

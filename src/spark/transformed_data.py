@@ -7,25 +7,34 @@ from awsglue.job import Job
 import pyspark.sql.functions as F
 
 
-args = {
-    "JOB_NAME": "my_jupyter_job"
-}
+class CarPricing:
+    def __init__(self):
+        self.spark = self._create_job()
 
-sc = SparkContext()
-glueContext = GlueContext(sc)
-spark = glueContext.spark_session
-job = Job(glueContext)
-job.init(args["JOB_NAME"], args)
+    def read_data(self, file_path="s3a://datalake-dados-dionizio/cars_pricing.json"):
+        df = self.spark.read.json(file_path)
+        df = df.withColumn("Preço", F.regexp_replace("Preço", "R\\$", ""))
+        return df
 
-spark.sparkContext.setLogLevel("ERROR")
+    @staticmethod
+    def _create_job():
+        args = {
+            "JOB_NAME": "my_jupyter_job"
+        }
 
-# Exemplo de leitura de um arquivo JSON no S3
-df = spark.read.json("s3a://datalake-dados-dionizio/cars_pricing.json")
-df.show()
+        sc = SparkContext()
+        glueContext = GlueContext(sc)
+        spark = glueContext.spark_session
+        job = Job(glueContext)
+        job.init(args["JOB_NAME"], args)
 
-df = spark.read.json("s3://datalake-dados-dionizio/cars_pricing.json")
-df = df.withColumn("Preço", F.regexp_replace("Preço", "R\\$", ""))
+        return spark
 
-output_path = "s3://datawarehouse-dados/cars_pricing_parquet/"
+    def write_data(self, df, output_path="s3://datawarehouse-dados/cars_pricing_parquet/"):
+        df.write.mode("overwrite").parquet(output_path)
 
-df.write.mode("overwrite").parquet(output_path)
+
+if __name__ == "__main__":
+    data = CarPricing()
+    df = data.read_data()
+    data.write_data(df)
